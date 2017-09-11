@@ -1,0 +1,9 @@
+GuzzleHttp\Psr7\Stream::__set_state(/* #5f5f */ [
+	'stream' => /* resource stream */,
+	'size' => null,
+	'seekable' => true,
+	'readable' => true,
+	'writable' => true,
+	'uri' => 'php://temp',
+	'customMetadata' => [],
+])

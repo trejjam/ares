@@ -1,0 +1,54 @@
+{
+	"name": "trejjam/ares",
+	"description": "Nette Ares",
+	"keywords": [
+		"nette",
+		"ares",
+		"ico"
+	],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jan Trejbal"
+		}
+	],
+	"support": {
+		"email": "jan.trejbal@tremi.cz",
+		"issues": "https://gitlab.trem.in/trejjam/ares/issues"
+	},
+	"require": {
+		"php": ">=7.1",
+
+		"ext-simplexml": "^7.1",
+
+		"nette/di": "~2.4",
+		"nette/http": "~2.4",
+		"nette/utils": "~2.4",
+		"guzzlehttp/guzzle": "^6.2",
+		"composer/ca-bundle": "^1.0",
+		"trejjam/base-extension": "~0.6"
+	},
+	"require-dev": {
+		"nette/tester": "@dev",
+
+		"kdyby/console": "~2.6"
+	},
+	"suggest": {
+
+	},
+	"autoload": {
+		"psr-4": {
+			"Trejjam\\Ares\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Trejjam\\Ares\\Tests\\": "tests/"
+		}
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "v0.1.x-dev"
+		}
+	}
+}
