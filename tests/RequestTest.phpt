@@ -42,7 +42,15 @@ class RequestTest extends Tester\TestCase
 		$invalidIcoFetch = $this->aresRequest->fetch('27074357');
 		Assert::type(SimpleXMLElement::class, $invalidIcoFetch);
 
-		$this->aresRequest->getResponse('27074358');
+		/** @var Ares\Entity\Ares $ares */
+		$ares = $this->aresRequest->getResponse('27074358');
+		Assert::type(Ares\Entity\Ares::class, $ares);
+
+		$address = $ares->getAddress();
+		$legalForm = $ares->getLegalForm();
+
+		Assert::type(Ares\Entity\Address::class, $address);
+		Assert::type(Ares\Entity\LegalForm::class, $legalForm);
 
 		Assert::throws(function () {
 			$this->aresRequest->getResponse('27074357');
