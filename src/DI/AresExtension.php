@@ -10,7 +10,8 @@ use Trejjam;
 class AresExtension extends Trejjam\BaseExtension\DI\BaseExtension
 {
 	protected $default = [
-		'http' => [
+		'mapper' => Trejjam\Ares\Mapper::class,
+		'http'   => [
 			'client' => [
 				'verify' => NULL, //NULL will be filled by Composer CA
 			],
@@ -33,7 +34,12 @@ class AresExtension extends Trejjam\BaseExtension\DI\BaseExtension
 
 		$config = $this->createConfig();
 
+		$builder = $this->getContainerBuilder();
 		$classes = $this->getClasses();
+
+		$builder->addDefinition('mapper')
+				->setFactory($config['mapper'])
+				->setType(Trejjam\Ares\IMapper::class);
 
 		$classes['http.client']->setArguments(
 			[
