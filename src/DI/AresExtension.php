@@ -23,27 +23,22 @@ class AresExtension extends Trejjam\BaseExtension\DI\BaseExtension
 		'request'     => Trejjam\Ares\Request::class,
 	];
 
-	public function __construct()
+	public function loadConfiguration(bool $validateConfig = TRUE) : void
 	{
 		$this->default['http']['client']['verify'] = Composer\CaBundle\CaBundle::getSystemCaRootBundlePath();
-	}
 
-	public function loadConfiguration()
-	{
 		parent::loadConfiguration();
-
-		$config = $this->createConfig();
 
 		$builder = $this->getContainerBuilder();
 		$classes = $this->getClasses();
 
 		$builder->addDefinition('mapper')
-				->setFactory($config['mapper'])
+				->setFactory($this->config['mapper'])
 				->setType(Trejjam\Ares\IMapper::class);
 
 		$classes['http.client']->setArguments(
 			[
-				'config' => $config['http']['client'],
+				'config' => $this->config['http']['client'],
 			]
 		)->setAutowired(FALSE);
 
