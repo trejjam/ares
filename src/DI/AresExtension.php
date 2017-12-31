@@ -30,19 +30,19 @@ class AresExtension extends Trejjam\BaseExtension\DI\BaseExtension
 		parent::loadConfiguration();
 
 		$builder = $this->getContainerBuilder();
-		$classes = $this->getClasses();
+		$types = $this->getTypes();
 
 		$builder->addDefinition('mapper')
 				->setFactory($this->config['mapper'])
 				->setType(Trejjam\Ares\IMapper::class);
 
-		$classes['http.client']->setArguments(
+		$types['http.client']->setArguments(
 			[
 				'config' => $this->config['http']['client'],
 			]
 		)->setAutowired(FALSE);
 
-		$classes['request']->setArguments(
+		$types['request']->setArguments(
 			[
 				'httpClient' => $this->prefix('@http.client'),
 			]
