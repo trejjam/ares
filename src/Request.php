@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Trejjam\Ares;
 
 use GuzzleHttp;
+use Nette\Http\Url;
 use Safe\Exceptions\SimplexmlException;
 use SimpleXMLElement;
 use function Safe\simplexml_load_string;
@@ -63,7 +64,7 @@ class Request
 
     protected function createUrl(string $ico) : string
     {
-        $url = new Nette\Http\Url(static::URL);
+        $url = new Url(static::URL);
         $url->setQueryParameter('ico', $ico);
 
         return $url->getAbsoluteUrl();
