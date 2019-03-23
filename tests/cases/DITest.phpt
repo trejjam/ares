@@ -18,14 +18,14 @@ class DITest extends Tester\TestCase
 		$aresExtension = new DI\AresExtension;
 
 		$aresExtension->setCompiler(new Nette\DI\Compiler, 'container_' . __FUNCTION__);
-		$mailChimpConfig = $aresExtension->createConfig();
+		$aresConfig = $aresExtension->loadConfiguration();
 
 		Assert::same(
 			[
 				'http' => [
 					'client' => ['verify' => Composer\CaBundle\CaBundle::getSystemCaRootBundlePath()],
 				],
-			], $mailChimpConfig
+			], $aresConfig
 		);
 	}
 }

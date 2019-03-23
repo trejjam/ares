@@ -29,9 +29,18 @@
 		"trejjam/base-extension": "~0.7"
 	},
 	"require-dev": {
-		"nette/tester": "@dev",
+		"nette/tester": "^2.2",
 
-		"kdyby/console": "~2.6"
+		"phpstan/phpstan": "^0.11",
+		"phpstan/phpstan-deprecation-rules": "^0.11",
+		"phpstan/phpstan-strict-rules": "^0.11",
+		"thecodingmachine/phpstan-safe-rule": "^0.1",
+		"roave/no-floaters": "dev-master",
+
+		"symplify/easy-coding-standard": "^5.0",
+
+		"sensiolabs/security-checker": "^5.0",
+		"roave/security-advisories": "dev-master"
 	},
 	"suggest": {
 
@@ -43,12 +52,12 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Trejjam\\Ares\\Tests\\": "tests/"
+			"Trejjam\\Ares\\Tests\\": "tests/src/"
 		}
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "v0.1.x-dev"
+			"dev-master": "v0.2.x-dev"
 		}
 	}
 }

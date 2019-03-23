@@ -1,0 +1,7 @@
+#!/bin/bash
+
+TARGET_TEST="${1}"
+
+mkdir -p ./temp
+
+./vendor/bin/tester -s -c ./tests/config/php.ini-unix -j 32 "./tests/cases/${TARGET_TEST}" --coverage ./temp/coverage.html --coverage-src ./src/

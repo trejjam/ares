@@ -1,0 +1,25 @@
+parameters:
+	autoload_directories:
+		- %rootDir%/../../../src/
+	ignoreErrors:
+		-
+			message: ~^Property Trejjam\\Ares\\DI\\AresExtension::\$default has no typehint specified\.$~
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		-
+			message: '~^Method Trejjam\\Ares\\IMapper::map\(\) has no return typehint specified\.$~'
+			path: %currentWorkingDirectory%/src/IMapper.php
+
+	earlyTerminatingMethodCalls:
+		Nette\Application\UI\Presenter:
+			- redirect
+			- redirectUrl
+			- sendJson
+			- sendResponse
+			- sendPayload
+	#disallowFloatsEverywhere: true
+
+includes:
+	- ../../vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- ../../vendor/phpstan/phpstan-strict-rules/rules.neon
+	- ../../vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
+	- ../../vendor/roave/no-floaters/rules.neon

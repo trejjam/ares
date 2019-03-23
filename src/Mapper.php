@@ -37,7 +37,7 @@ final class Mapper implements IMapper
 		return $this->mapToEntity($dataNodes->VBAS);
 	}
 
-	private function mapToEntity(SimpleXMLElement $VBAS)
+	private function mapToEntity(SimpleXMLElement $VBAS) : Entity\Ares
 	{
 		$legalForm = new Entity\LegalForm(
 			intval($VBAS->PF->KPF),

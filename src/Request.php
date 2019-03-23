@@ -6,7 +6,9 @@ namespace Trejjam\Ares;
 use GuzzleHttp;
 use Nette;
 use Psr\Http;
+use Safe\Exceptions\SimplexmlException;
 use SimpleXMLElement;
+use function Safe\simplexml_load_string;
 
 class Request
 {
@@ -43,16 +45,17 @@ class Request
 
 		$contents = $body->getContents();
 
-		$xml = @simplexml_load_string($contents);
-
-		if ($xml === FALSE) {
+		try {
+			$xml = simplexml_load_string($contents);
+		}
+		catch (SimplexmlException $e) {
 			throw (new IcoNotFoundException($ico))->setResponse($response);
 		}
 
 		return $xml;
 	}
 
-	public function getResponse(string $ico)
+	public function getResponse(string $ico) : Entity\Ares
 	{
 		return $this->mapper->map(
 			$this->fetch($ico),
@@ -60,7 +63,7 @@ class Request
 		);
 	}
 
-	protected function createUrl(string $ico)
+	protected function createUrl(string $ico) : string
 	{
 		$url = new Nette\Http\Url(static::URL);
 		$url->setQueryParameter('ico', $ico);
