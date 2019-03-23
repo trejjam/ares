@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Trejjam\Ares;
 
 use GuzzleHttp;
-use Nette;
 use Safe\Exceptions\SimplexmlException;
 use SimpleXMLElement;
 use function Safe\simplexml_load_string;
