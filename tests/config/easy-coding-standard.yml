@@ -1,0 +1,38 @@
+services:
+  PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer:
+    space_before: one
+  PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff:
+    exact: false
+    indent: 2
+  Symplify\CodingStandard\Fixer\Order\PrivateMethodOrderByUseFixer: ~
+  Symplify\CodingStandard\Sniffs\Architecture\PreferredClassSniff:
+    oldToPreferredClasses:
+      DateTime: 'DateTimeImmutable'
+  Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer: ~
+  Symplify\CodingStandard\Sniffs\Commenting\AnnotationTypeExistsSniff: ~
+
+imports:
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/common/array.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/common/control-structures.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/common/docblock.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/common/namespaces.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/common/strict.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/clean-code.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/psr2.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/psr12.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/php70.yml' }
+  - { resource: '../../vendor/symplify/easy-coding-standard/config/php71.yml' }
+
+parameters:
+  indentation: spaces
+  exclude_checkers:
+    - PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer
+    - PhpCsFixer\Fixer\Basic\BracesFixer
+
+    - SlevomatCodingStandard\Sniffs\TypeHints\TypeHintDeclarationSniff
+    - PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer
+
+    - PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff
+
+  skip:
+    PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ControlSignatureSniff.SpaceAfterCloseBrace: ~

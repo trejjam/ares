@@ -5,5 +5,5 @@ namespace Trejjam\Ares;
 
 interface IMapper
 {
-	public function map(\SimpleXMLElement $xml, string $ico);
+    public function map(\SimpleXMLElement $xml, string $ico);
 }

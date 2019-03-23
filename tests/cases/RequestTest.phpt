@@ -10,7 +10,7 @@ use Tester;
 use Tester\Assert;
 use Trejjam\Ares;
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 class RequestTest extends Tester\TestCase
 {

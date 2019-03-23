@@ -5,69 +5,68 @@ namespace Trejjam\Ares;
 
 use GuzzleHttp;
 use Nette;
-use Psr\Http;
 use Safe\Exceptions\SimplexmlException;
 use SimpleXMLElement;
 use function Safe\simplexml_load_string;
 
 class Request
 {
-	const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
+    private const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
 
-	/**
-	 * @var GuzzleHttp\Client
-	 */
-	private $httpClient;
-	/**
-	 * @var IMapper
-	 */
-	private $mapper;
+    /**
+     * @var GuzzleHttp\Client
+     */
+    private $httpClient;
+    /**
+     * @var IMapper
+     */
+    private $mapper;
 
-	public function __construct(
-		GuzzleHttp\Client $httpClient,
-		IMapper $mapper
-	) {
-		$this->httpClient = $httpClient;
-		$this->mapper = $mapper;
-	}
+    public function __construct(
+        GuzzleHttp\Client $httpClient,
+        IMapper $mapper
+    ) {
+        $this->httpClient = $httpClient;
+        $this->mapper = $mapper;
+    }
 
-	public function fetch(string $ico) : SimpleXMLElement
-	{
-		$response = $this->httpClient->get(
-			$this->createUrl($ico)
-		);
+    public function fetch(string $ico) : SimpleXMLElement
+    {
+        $response = $this->httpClient->get(
+            $this->createUrl($ico)
+        );
 
-		if ($response->getStatusCode() !== 200) {
-			throw (new IcoNotFoundException($ico))->setResponse($response);
-		}
+        if ($response->getStatusCode() !== 200) {
+            throw (new IcoNotFoundException($ico))->setResponse($response);
+        }
 
-		$body = $response->getBody();
+        $body = $response->getBody();
 
-		$contents = $body->getContents();
+        $contents = $body->getContents();
 
-		try {
-			$xml = simplexml_load_string($contents);
-		}
-		catch (SimplexmlException $e) {
-			throw (new IcoNotFoundException($ico))->setResponse($response);
-		}
+        try {
+            $xml = simplexml_load_string($contents);
+        }
+        catch (SimplexmlException $e) {
+            throw (new IcoNotFoundException($ico))->setResponse($response);
+        }
 
-		return $xml;
-	}
+        return $xml;
+    }
 
-	public function getResponse(string $ico) : Entity\Ares
-	{
-		return $this->mapper->map(
-			$this->fetch($ico),
-			$ico
-		);
-	}
+    public function getResponse(string $ico) : Entity\Ares
+    {
+        return $this->mapper->map(
+            $this->fetch($ico),
+            $ico
+        );
+    }
 
-	protected function createUrl(string $ico) : string
-	{
-		$url = new Nette\Http\Url(static::URL);
-		$url->setQueryParameter('ico', $ico);
+    protected function createUrl(string $ico) : string
+    {
+        $url = new Nette\Http\Url(static::URL);
+        $url->setQueryParameter('ico', $ico);
 
-		return $url->getAbsoluteUrl();
-	}
+        return $url->getAbsoluteUrl();
+    }
 }

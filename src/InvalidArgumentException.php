@@ -5,5 +5,4 @@ namespace Trejjam\Ares;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {
-
 }

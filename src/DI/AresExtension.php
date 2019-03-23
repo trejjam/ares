@@ -13,27 +13,27 @@ use Trejjam\BaseExtension\DI\BaseExtension;
 
 class AresExtension extends BaseExtension
 {
-	protected $default = [
-		'mapper' => Ares\Mapper::class,
-		'http'   => [
-			'clientFactory' => null,
-			'client' => [
-				'verify' => NULL, //NULL will be filled by Composer CA
-			],
-		],
-	];
+    protected $default = [
+        'mapper' => Ares\Mapper::class,
+        'http'   => [
+            'clientFactory' => null,
+            'client' => [
+                'verify' => null, //NULL will be filled by Composer CA
+            ],
+        ],
+    ];
 
-	protected $classesDefinition = [
-		'http.client' => GuzzleHttp\Client::class,
-		'request'     => Ares\Request::class,
-	];
+    protected $classesDefinition = [
+        'http.client' => GuzzleHttp\Client::class,
+        'request'     => Ares\Request::class,
+    ];
 
-	public function __construct()
-	{
-		$this->default['http']['client']['verify'] = CaBundle::getSystemCaRootBundlePath();
-	}
+    public function __construct()
+    {
+        $this->default['http']['client']['verify'] = CaBundle::getSystemCaRootBundlePath();
+    }
 
-	public function loadConfiguration(bool $validateConfig = TRUE) : void
+    public function loadConfiguration(bool $validateConfig = true) : void
     {
         parent::loadConfiguration();
 
@@ -44,14 +44,14 @@ class AresExtension extends BaseExtension
     {
         parent::beforeCompile();
 
-		$builder = $this->getContainerBuilder();
-		$types = $this->getTypes();
+        $builder = $this->getContainerBuilder();
+        $types = $this->getTypes();
 
-		$builder->addDefinition('mapper')
-				->setFactory($this->config['mapper'])
-				->setType(Ares\IMapper::class);
+        $builder->addDefinition('mapper')
+                ->setFactory($this->config['mapper'])
+                ->setType(Ares\IMapper::class);
 
-		if ($this->config['http']['clientFactory']!==null) {
+        if ($this->config['http']['clientFactory'] !== null) {
             if (is_string($this->config['http']['clientFactory']) && Strings::startsWith($this->config['http']['clientFactory'], '@')) {
                 $types['http.client']->setFactory($this->config['http']['clientFactory']);
             }
@@ -60,16 +60,16 @@ class AresExtension extends BaseExtension
             }
         }
 
-		$types['http.client']->setArguments(
-			[
-				'config' => $this->config['http']['client'],
-			]
-		)->setAutowired(FALSE);
+        $types['http.client']->setArguments(
+            [
+                'config' => $this->config['http']['client'],
+            ]
+        )->setAutowired(false);
 
-		$types['request']->setArguments(
-			[
-				'httpClient' => $this->prefix('@http.client'),
-			]
-		);
-	}
+        $types['request']->setArguments(
+            [
+                'httpClient' => $this->prefix('@http.client'),
+            ]
+        );
+    }
 }
