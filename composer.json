@@ -26,7 +26,7 @@
 		"nette/utils": "~2.4",
 		"guzzlehttp/guzzle": "^6.2",
 		"composer/ca-bundle": "^1.0",
-		"trejjam/base-extension": "~0.7"
+		"trejjam/base-extension": "^0.8"
 	},
 	"require-dev": {
 		"nette/tester": "^2.2",
