@@ -35,7 +35,6 @@
 		"phpstan/phpstan-deprecation-rules": "^0.11",
 		"phpstan/phpstan-strict-rules": "^0.11",
 		"thecodingmachine/phpstan-safe-rule": "^0.1",
-		"roave/no-floaters": "dev-master",
 
 		"symplify/easy-coding-standard": "^5.0",
 
