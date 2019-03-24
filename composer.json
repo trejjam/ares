@@ -21,10 +21,10 @@
 
 		"ext-simplexml": "^7.1",
 
-		"nette/di": "~2.4",
-		"nette/http": "~2.4",
-		"nette/utils": "~2.4",
-		"guzzlehttp/guzzle": "^6.2",
+		"nette/di": "^2.4.10 || ^3.0",
+		"nette/http": "^2.4 || ^3.0",
+		"nette/utils": "^2.4 || ^3.0",
+		"guzzlehttp/guzzle": "^6.3",
 		"composer/ca-bundle": "^1.0",
 		"trejjam/base-extension": "^0.8"
 	},
