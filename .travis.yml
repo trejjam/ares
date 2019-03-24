@@ -36,9 +36,10 @@ jobs:
         - make sensiolab
 
     - stage: Phpstan
-      php: 7.1
+      php: 7.2
       script:
-        - make phpstan
+        - composer run-script phpstan-install
+        - composer run-script phpstan
 
     - stage: Test Coverage
       if: branch = master AND type = push

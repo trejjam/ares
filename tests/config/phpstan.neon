@@ -1,6 +1,6 @@
 parameters:
 	autoload_directories:
-		- %rootDir%/../../../src/
+		- %rootDir%/../../../../../src/
 	ignoreErrors:
 		-
 			message: ~^Property Trejjam\\Ares\\DI\\AresExtension::\$default has no typehint specified\.$~
@@ -19,7 +19,7 @@ parameters:
 	#disallowFloatsEverywhere: true
 
 includes:
-	- ../../vendor/phpstan/phpstan-deprecation-rules/rules.neon
-	- ../../vendor/phpstan/phpstan-strict-rules/rules.neon
-	- ../../vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
-	#- ../../vendor/roave/no-floaters/rules.neon # enable me in future (PHP 7.2 and later)
+	- ../../temp/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- ../../temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
+	- ../../temp/phpstan/vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
+	- ../../temp/phpstan/vendor/roave/no-floaters/rules.neon
