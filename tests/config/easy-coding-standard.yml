@@ -25,14 +25,13 @@ imports:
 
 parameters:
   indentation: spaces
-  exclude_checkers:
-    - PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer
-    - PhpCsFixer\Fixer\Basic\BracesFixer
-
-    - SlevomatCodingStandard\Sniffs\TypeHints\TypeHintDeclarationSniff
-    - PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer
-
-    - PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff
 
   skip:
     PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ControlSignatureSniff.SpaceAfterCloseBrace: ~
+    PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer: ~
+    PhpCsFixer\Fixer\Basic\BracesFixer: ~
+
+    SlevomatCodingStandard\Sniffs\TypeHints\TypeHintDeclarationSniff: ~
+    PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer: ~
+
+    PHP_CodeSniffer\Standards\Generic\Sniffs\WhiteSpace\ScopeIndentSniff: ~
