@@ -3,11 +3,34 @@ parameters:
 		- %rootDir%/../../../../../src/
 	ignoreErrors:
 		-
-			message: ~^Property Trejjam\\Ares\\DI\\AresExtension::\$default has no typehint specified\.$~
-			path: %currentWorkingDirectory%/src/DI/AresExtension.php
-		-
 			message: '~^Method Trejjam\\Ares\\IMapper::map\(\) has no return typehint specified\.$~'
 			path: %currentWorkingDirectory%/src/IMapper.php
+
+		- # pre Nette 3.0 compatibility
+			message: "~^Call to function method_exists\\(\\) with 'Trejjam…' and 'getConfigSchema' will always evaluate to false.$~"
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: "~^Call to function method_exists\\(\\) with \\$this\\(Trejjam\\\\Ares\\\\DI\\\\AresExtension\\) and 'loadDefinitionsFrom…' will always evaluate to true.$~"
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: ~^Cannot access offset '.*' on Trejjam\\Ares\\DI\\ExtensionConfiguration\.$~
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: ~^Casting to Trejjam\\Ares\\DI\\ExtensionConfiguration something that's already Trejjam\\Ares\\DI\\ExtensionConfiguration\.$~
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: ~^Casting to Trejjam\\Ares\\DI\\HttpClientConfiguration something that's already Trejjam\\Ares\\DI\\HttpClientConfiguration\.$~
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Call to deprecated method loadDefinition\(\) of class Nette\\DI\\Compiler\.$~'
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Static method Nette\\DI\\Compiler::loadDefinition\(\) invoked with 2 parameters, 0 required\.$~'
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Property Trejjam\\Ares\\DI\\AresExtension::\$config \(Trejjam\\Ares\\DI\\ExtensionConfiguration\) does not accept array\.$~'
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+
 
 	earlyTerminatingMethodCalls:
 		Nette\Application\UI\Presenter:
