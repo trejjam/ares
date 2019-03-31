@@ -25,7 +25,7 @@
 		"nette/http": "^2.4 || ^3.0",
 		"nette/utils": "^2.4 || ^3.0",
 		"guzzlehttp/guzzle": "^6.3",
-		"composer/ca-bundle": "^1.0",
+		"composer/ca-bundle": "^1.1",
 		"trejjam/base-extension": "^0.8",
 		"thecodingmachine/safe": "^0.1.14"
 	},
@@ -37,9 +37,8 @@
 		"sensiolabs/security-checker": "^5.0",
 		"roave/security-advisories": "dev-master"
 	},
-	"suggest": {
-
-	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
 			"Trejjam\\Ares\\": "src/"
