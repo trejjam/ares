@@ -45,7 +45,7 @@ jobs:
       script:
         - vendor/bin/tester -s -p php --colors 1 ./tests/cases
 
-        - composer run-script phpstan
+        - composer run-script -- phpstan -c tests/config/phpstan.nette3.0.neon
 
     - stage: Quality Assurance
       php: 7.1
