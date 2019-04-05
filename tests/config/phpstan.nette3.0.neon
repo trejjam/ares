@@ -10,6 +10,9 @@ parameters:
 		- # pre Nette 3.0 compatibility
 			message: '~^Static method Nette\\DI\\Compiler::loadDefinition\(\) invoked with 2 parameters, 0 required\.$~'
 			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Call to deprecated method validateConfig\(\) of class Nette\\DI\\CompilerExtension\.$~'
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
 
 includes:
 	- phpstan.neon

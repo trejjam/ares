@@ -5,8 +5,8 @@ namespace Trejjam\Ares\DI;
 
 use GuzzleHttp;
 use Nette\DI\Compiler;
-use Nette\DI\Config\Expect;
-use Nette\DI\Config\Schema;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 use Nette\Utils\Strings;
 use Nette\Utils\Validators;
 use Trejjam\Ares;

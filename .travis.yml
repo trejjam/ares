@@ -37,10 +37,6 @@ jobs:
         - travis_retry composer require nette/di:^3.0
         - travis_retry composer update --no-progress --prefer-dist
 
-        - mkdir -p temp/phpstan
-        - composer init -d temp/phpstan -n
-        - composer config  -d temp/phpstan minimum-stability RC
-        - travis_retry composer require -d temp/phpstan nette/di:^3.0
         - travis_retry composer run-script phpstan-install
       script:
         - vendor/bin/tester -s -p php --colors 1 ./tests/cases

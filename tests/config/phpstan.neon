@@ -22,7 +22,7 @@ parameters:
 			message: '~^Property Trejjam\\Ares\\DI\\AresExtension::\$config \(Trejjam\\Ares\\DI\\ExtensionConfiguration\) does not accept array\.$~'
 			path: %currentWorkingDirectory%/src/DI/AresExtension.php
 		- # pre Nette 3.0 compatibility
-			message: '~^Call to static method from\(\) on an unknown class Nette\\DI\\Config\\Expect\.$~'
+			message: '~^Call to static method from\(\) on an unknown class Nette\\Schema\\Expect\.$~'
 			path: %currentWorkingDirectory%/src/DI/AresExtension.php
 		- # pre Nette 3.0 compatibility
 			message: '~^Return typehint of method Trejjam\\Ares\\DI\\AresExtension::getConfigSchema\(\) has invalid type Nette\\DI\\Config\\Schema\.$~'
