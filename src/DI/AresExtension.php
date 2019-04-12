@@ -91,7 +91,7 @@ class AresExtension extends BaseExtension
             }
         }
 
-        $mapper = $builder->getDefinition($this->prefix('mapper'))
+        $builder->getDefinition($this->prefix('mapper'))
                 ->setType(Ares\IMapper::class);
 
         if ($this->config->http->clientFactory !== null) {
