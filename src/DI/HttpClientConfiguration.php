@@ -10,7 +10,7 @@ final class HttpClientConfiguration
 {
     /** @var string|array|Statement|null */
     public $clientFactory = null;
-    /** @var mixed[] */
+    /** @var array */
     public $client = [];
 
     public function __construct()

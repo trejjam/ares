@@ -71,16 +71,15 @@ class AresExtension extends BaseExtension
         $builder = $this->getContainerBuilder();
         $types = $this->getTypes();
 
-        $mapper = $builder->addDefinition('mapper')
-                ->setType(Ares\IMapper::class);
-
         if (is_string($this->config->mapper) && Strings::startsWith($this->config->mapper, '@')) {
-            $mapper->setFactory($this->config->mapper);
+            $builder->addDefinition($this->prefix('mapper'))
+                    ->setFactory($this->config->mapper);
         }
         else {
             if (!method_exists($this, 'loadDefinitionsFromConfig')) {
                 // pre Nette 3.0 compatibility
 
+                $mapper = $builder->addDefinition($this->prefix('mapper'));
                 Compiler::loadDefinition($mapper, $this->config->mapper);
             }
             else {
@@ -91,6 +90,9 @@ class AresExtension extends BaseExtension
                 );
             }
         }
+
+        $mapper = $builder->getDefinition($this->prefix('mapper'))
+                ->setType(Ares\IMapper::class);
 
         if ($this->config->http->clientFactory !== null) {
             if (is_string($this->config->http->clientFactory) && Strings::startsWith($this->config->http->clientFactory, '@')) {
