@@ -13,6 +13,9 @@ parameters:
 		- # pre Nette 3.0 compatibility
 			message: '~^Call to deprecated method validateConfig\(\) of class Nette\\DI\\CompilerExtension\.$~'
 			path: %currentWorkingDirectory%/src/DI/AresExtension.php
+		- # pre Nette 3.0 compatibility
+			message: '~^Call to protected method setType\(\) of class Nette\\DI\\Definitions\\Definition\.$~'
+			path: %currentWorkingDirectory%/src/DI/AresExtension.php
 
 includes:
 	- phpstan.neon
