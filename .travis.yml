@@ -39,7 +39,7 @@ jobs:
       php: 7.2
       script:
         - composer run-script phpstan-install
-        - composer run-script -- phpstan -c tests/config/phpstan.nette3.0.neon
+        - composer run-script -- phpstan
 
     - stage: Test Coverage
       if: branch = master AND type = push

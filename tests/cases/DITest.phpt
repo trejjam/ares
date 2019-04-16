@@ -8,7 +8,8 @@ use GuzzleHttp;
 use Nette;
 use Nette\DI\Compiler;
 use Nette\DI\Definitions\Reference;
-use Tester;
+use Tester\TestCase;
+use Tester\Expect;
 use Tester\Assert;
 use Trejjam\Ares\Mapper;
 use Trejjam\Ares\DI\AresExtension;
@@ -16,102 +17,140 @@ use Composer;
 
 require __DIR__ . '/../bootstrap.php';
 
-class DITest extends Tester\TestCase
+class DITest extends TestCase
 {
-	private const NAME = 'trejjam.ares';
+    private const NAME = 'trejjam.ares';
 
     public function testConfig()
     {
-    	$aresExtension = new AresExtension;
+        $aresExtension = new AresExtension;
 
-		$compiler = new Compiler;
-		$compiler->addExtension(self::NAME, $aresExtension);
+        $compiler = new Compiler;
+        $compiler->addExtension(self::NAME, $aresExtension);
 
-		$compiler->processExtensions();
+        $compiler->processExtensions();
 
         $aresConfig = $aresExtension->getConfig();
 
         Assert::same(Mapper::class, $aresConfig->mapper);
         Assert::null($aresConfig->http->clientFactory);
-        Assert::same(['verify' => CaBundle::getSystemCaRootBundlePath()], $aresConfig->http->client);
+        Assert::same(CaBundle::getSystemCaRootBundlePath(), $aresConfig->http->caChain);
+
+        Assert::same([], $aresConfig->http->client);
     }
 
-	public function testGuzzleFactory() : void
-	{
-		$aresExtension = new AresExtension;
+    public function testGuzzleFactory() : void
+    {
+        $aresExtension = new AresExtension;
 
-		$compiler = new Compiler;
-		$compiler->addExtension(self::NAME, $aresExtension);
-		$compiler->addConfig(
-			[
-				self::NAME => [
-					'http'   => [
-						'clientFactory' => '@guzzleClassFactory',
-					],
-				],
-			]
-		);
-		$containerBuilder = $compiler->getContainerBuilder();
+        $compiler = new Compiler;
+        $compiler->addExtension(self::NAME, $aresExtension);
+        $compiler->addConfig(
+            [
+                self::NAME => [
+                    'http' => [
+                        'clientFactory' => '@guzzleClassFactory',
+                    ],
+                ],
+            ]
+        );
+        $containerBuilder = $compiler->getContainerBuilder();
 
-		$guzzleClassFactory = $containerBuilder->addDefinition('guzzleClassFactory');
-		$guzzleClassFactory->setType(GuzzleHttp\Client::class);
+        $guzzleClassFactory = $containerBuilder->addDefinition('guzzleClassFactory');
+        $guzzleClassFactory->setType(GuzzleHttp\Client::class);
 
-		$compiler->processExtensions();
+        $compiler->processExtensions();
 
-		$aresExtension->beforeCompile();
+        $aresExtension->beforeCompile();
 
-		$aresConfig = $aresExtension->getConfig();
+        $aresConfig = $aresExtension->getConfig();
 
-		Assert::same(Mapper::class, $aresConfig->mapper);
-		Assert::same('@guzzleClassFactory', $aresConfig->http->clientFactory);
-		Assert::same(['verify' => CaBundle::getSystemCaRootBundlePath()], $aresConfig->http->client);
+        Assert::same(Mapper::class, $aresConfig->mapper);
+        Assert::same('@guzzleClassFactory', $aresConfig->http->clientFactory);
 
-		$httpClient = $containerBuilder->getDefinition(self::NAME . '.http.client');
+        Assert::same(CaBundle::getSystemCaRootBundlePath(), $aresConfig->http->caChain);
+        Assert::same(['verify' => CaBundle::getSystemCaRootBundlePath()], $aresConfig->http->client);
 
-		$httpClientServiceDefinition = $httpClient->getFactory()->getEntity();
-		if ($httpClientServiceDefinition instanceof Reference) {
-			Assert::same('guzzleClassFactory', $httpClientServiceDefinition->getValue());
-		}
-		else {
-			// pre Nette 3.0 compatibility
-			Assert::same('@guzzleClassFactory', $httpClientServiceDefinition);
-		}
-	}
+        $httpClient = $containerBuilder->getDefinition(self::NAME . '.http.client');
 
-	public function testGuzzleFactory2() : void
-	{
-		$aresExtension = new AresExtension;
+        $httpClientServiceDefinition = $httpClient->getFactory()->getEntity();
+        Assert::same('guzzleClassFactory', $httpClientServiceDefinition->getValue());
+    }
 
-		$compiler = new Compiler;
-		$compiler->addExtension(self::NAME, $aresExtension);
-		$compiler->addConfig(
-			[
-				self::NAME => [
-					'http'   => [
-						'clientFactory' => 'GuzzleHttp\Client([])',
-					],
-				],
-			]
-		);
-		$containerBuilder = $compiler->getContainerBuilder();
+    public function testGuzzleFactory2() : void
+    {
+        $aresExtension = new AresExtension;
 
-		$compiler->processExtensions();
+        $compiler = new Compiler;
+        $compiler->addExtension(self::NAME, $aresExtension);
+        $compiler->addConfig(
+            [
+                self::NAME => [
+                    'http' => [
+                        'clientFactory' => 'GuzzleHttp\Client([])',
+                    ],
+                ],
+            ]
+        );
+        $containerBuilder = $compiler->getContainerBuilder();
 
-		$aresExtension->beforeCompile();
+        $compiler->processExtensions();
 
-		$aresConfig = $aresExtension->getConfig();
+        $aresExtension->beforeCompile();
 
-		Assert::same(Mapper::class, $aresConfig->mapper);
-		Assert::same('GuzzleHttp\Client([])', $aresConfig->http->clientFactory);
-		Assert::same(['verify' => CaBundle::getSystemCaRootBundlePath()], $aresConfig->http->client);
+        $aresConfig = $aresExtension->getConfig();
 
-		$containerBuilder = $compiler->getContainerBuilder();
-		$containerBuilder = $compiler->getContainerBuilder();
-		$httpClient = $containerBuilder->getDefinition(self::NAME . '.http.client');
+        Assert::same(Mapper::class, $aresConfig->mapper);
+        Assert::same('GuzzleHttp\Client([])', $aresConfig->http->clientFactory);
 
-		$httpClientServiceDefinition = $httpClient->getFactory()->getEntity();
-		Assert::same('GuzzleHttp\Client([])', $httpClientServiceDefinition);
-	}
+        Assert::same(CaBundle::getSystemCaRootBundlePath(), $aresConfig->http->caChain);
+        Assert::same(['verify' => CaBundle::getSystemCaRootBundlePath()], $aresConfig->http->client);
+
+        $containerBuilder = $compiler->getContainerBuilder();
+        $containerBuilder = $compiler->getContainerBuilder();
+        $httpClient = $containerBuilder->getDefinition(self::NAME . '.http.client');
+
+        $httpClientServiceDefinition = $httpClient->getFactory()->getEntity();
+        Assert::same('GuzzleHttp\Client([])', $httpClientServiceDefinition);
+    }
+
+    public function testCertainityCaChainFactory() : void
+    {
+        $aresExtension = new AresExtension;
+
+        $compiler = new Compiler;
+        $compiler->addExtension(self::NAME, $aresExtension);
+        $compiler->addConfig(
+            [
+                self::NAME => [
+                    'http' => [
+                        'caChain' => 'ParagonIE\Certainty\RemoteFetch()::getLatestBundle()::getFilePath()',
+                    ],
+                ],
+            ]
+        );
+        $containerBuilder = $compiler->getContainerBuilder();
+
+        $compiler->processExtensions();
+
+        $aresExtension->beforeCompile();
+
+        $aresConfig = $aresExtension->getConfig();
+
+        Assert::same(Mapper::class, $aresConfig->mapper);
+        Assert::null($aresConfig->http->clientFactory);
+
+        Assert::same('ParagonIE\Certainty\RemoteFetch()::getLatestBundle()::getFilePath()', $aresConfig->http->caChain);
+        Assert::same(
+            ['verify' => 'ParagonIE\Certainty\RemoteFetch()::getLatestBundle()::getFilePath()'],
+            $aresConfig->http->client
+        );
+
+        $httpClient = $containerBuilder->getDefinition(self::NAME . '.http.client');
+        assert($httpClient instanceof Nette\DI\Definitions\ServiceDefinition);
+
+        Assert::same($aresConfig->http->client['verify'], $httpClient->getFactory()->arguments['config']['verify']);
+    }
 }
 
 $test = new DITest;

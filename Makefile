@@ -7,7 +7,7 @@ test: phpstan ecs sensiolab
 	XDEBUG_CONFIG="remote_enable=0" bin/run-tests
 
 phpstan:
-	XDEBUG_CONFIG="remote_enable=0" XDEBUG_CONFIG="remote_enable=0" composer run-script phpstan
+	XDEBUG_CONFIG="remote_enable=0" XDEBUG_CONFIG="remote_enable=0" composer run-script -- phpstan
 
 sensiolab:
 	XDEBUG_CONFIG="remote_enable=0" vendor/bin/security-checker security:check composer.lock

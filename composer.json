@@ -21,21 +21,26 @@
 
 		"ext-simplexml": "^7.1",
 
-		"nette/di": "^2.4.10 || ^3.0",
-		"nette/http": "^2.4 || ^3.0",
-		"nette/utils": "^2.4 || ^3.0",
+		"nette/di": "^3.0",
+		"nette/http": "^3.0",
+		"nette/utils": "^3.0",
 		"guzzlehttp/guzzle": "^6.3",
-		"composer/ca-bundle": "^1.1",
-		"trejjam/base-extension": "^0.8",
 		"thecodingmachine/safe": "^0.1.14"
 	},
 	"require-dev": {
 		"nette/tester": "^2.2",
 
+		"composer/ca-bundle": "^1.1",
+		"paragonie/certainty": "^2.2",
+
 		"symplify/easy-coding-standard": "^5.0",
 
 		"sensiolabs/security-checker": "^5.0",
 		"roave/security-advisories": "dev-master"
+	},
+	"suggest": {
+		"composer/ca-bundle": "Static CA root chain provider",
+		"paragonie/certainty": "Keep your CA root chain up to date"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,

@@ -22,8 +22,8 @@ trejjam.mailchimp:
   mapper: Trejjam\Ares\Mapper::class 
   http:
     clientFactory: null
-    client:
-      verify: Composer\CaBundle\CaBundle::getSystemCaRootBundlePath()
+    client: [] # options passed as arguments into clientFactory
+    caChain: Composer\CaBundle\CaBundle::getSystemCaRootBundlePath() # Requires `composer/ca-bundle` dependency installed
 ```
 
 Minimal production configuration:
@@ -31,6 +31,18 @@ Minimal production configuration:
 ```yaml
 extensions:
     trejjam.ares: Trejjam\Ares\DI\AresExtension
+```
+
+Recommended production configuration:  
+*Requires `paragonie/certainty` dependency installed*
+
+```yaml
+extensions:
+    trejjam.ares: Trejjam\Ares\DI\AresExtension
+    
+trejjam.mailchimp: 
+  http:
+    caChain: ParagonIE\Certainty\RemoteFetch('/path/to/data/', ParagonIE\Certainty\RemoteFetch::DEFAULT_URL, null)::getLatestBundle()::getFilePath()
 ```
 
 ## Configuration extra
