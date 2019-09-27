@@ -31,7 +31,7 @@
 		"nette/tester": "^2.2",
 
 		"composer/ca-bundle": "^1.1",
-		"paragonie/certainty": "^2.2",
+		"paragonie/certainty": "^2.5",
 
 		"symplify/easy-coding-standard": "^5.0",
 
