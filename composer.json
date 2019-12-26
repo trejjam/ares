@@ -33,7 +33,7 @@
 		"composer/ca-bundle": "^1.1",
 		"paragonie/certainty": "^2.2",
 
-		"symplify/easy-coding-standard": "^5.0",
+		"symplify/easy-coding-standard": "^6.1",
 
 		"sensiolabs/security-checker": "^5.0",
 		"roave/security-advisories": "dev-master"
