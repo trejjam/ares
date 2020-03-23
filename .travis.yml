@@ -38,7 +38,6 @@ jobs:
     - stage: Phpstan
       php: 7.4
       script:
-        - composer run-script phpstan-install
         - composer run-script -- phpstan
 
     - stage: Test Coverage
