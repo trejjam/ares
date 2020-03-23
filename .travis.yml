@@ -47,7 +47,7 @@ jobs:
       script:
         - vendor/bin/tester -s -p phpdbg --colors 1 -C -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src ./tests/cases
       after_script:
-        - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.1.0/php-coveralls.phar
+        - wget https://github.com/php-coveralls/php-coveralls/releases/download/v2.2.0/php-coveralls.phar
         - php php-coveralls.phar --verbose --config tests/config/.coveralls.yml
 
     - stage: Outdated Dependencies
