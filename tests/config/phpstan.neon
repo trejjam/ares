@@ -1,13 +1,14 @@
 parameters:
+	checkMissingIterableValueType: false
 	autoload_directories:
-		- %rootDir%/../../../../../src/
+		- %rootDir%/../../../src/
 	ignoreErrors:
 		-
 			message: '~^Method Trejjam\\Ares\\IMapper::map\(\) has no return typehint specified\.$~'
 			path: %currentWorkingDirectory%/src/IMapper.php
 
 		-
-			message: "~^Call to function method_exists\\(\\) with 'Composer\\\\\\\\CaBundle…' and 'getSystemCaRootBund…' will always evaluate to false\\.$~"
+			message: "~^Call to function method_exists\\(\\) with 'Composer.*' and 'getSystemCaRootBund…' will always evaluate to true\\.~"
 			path: %currentWorkingDirectory%/src/DI/AresExtension.php
 
 	earlyTerminatingMethodCalls:
@@ -20,7 +21,7 @@ parameters:
 	#disallowFloatsEverywhere: true
 
 includes:
-	- ../../temp/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
-	- ../../temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
-	- ../../temp/phpstan/vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
-	- ../../temp/phpstan/vendor/roave/no-floaters/rules.neon
+	- ../../vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- ../../vendor/phpstan/phpstan-strict-rules/rules.neon
+	- ../../vendor/thecodingmachine/phpstan-safe-rule/phpstan-safe-rule.neon
+	- ../../vendor/roave/no-floaters/rules.neon
