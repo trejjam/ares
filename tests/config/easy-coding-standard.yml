@@ -5,9 +5,6 @@ services:
     exact: false
     indent: 2
   Symplify\CodingStandard\Fixer\Order\PrivateMethodOrderByUseFixer: ~
-  Symplify\CodingStandard\Sniffs\Architecture\PreferredClassSniff:
-    oldToPreferredClasses:
-      DateTime: 'DateTimeImmutable'
   Symplify\CodingStandard\Fixer\Commenting\ParamReturnAndVarTagMalformsFixer: ~
   Symplify\CodingStandard\Sniffs\Commenting\AnnotationTypeExistsSniff: ~
 
