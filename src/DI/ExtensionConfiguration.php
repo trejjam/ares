@@ -8,7 +8,7 @@ use Trejjam\Ares\Mapper;
 
 final class ExtensionConfiguration
 {
-    /** 
+    /**
      * @var string|array|Statement
      */
     public $mapper = Mapper::class;
