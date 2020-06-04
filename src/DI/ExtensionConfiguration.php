@@ -8,10 +8,14 @@ use Trejjam\Ares\Mapper;
 
 final class ExtensionConfiguration
 {
-    /** @var string|array|Statement */
+    /**
+     * @var string|array|Statement
+     */
     public $mapper = Mapper::class;
 
-    /** @var HttpClientConfiguration */
+    /**
+     * @var HttpClientConfiguration
+     */
     public $http;
 
     public function __construct()
