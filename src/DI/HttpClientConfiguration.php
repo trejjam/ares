@@ -7,12 +7,18 @@ use Nette\DI\Statement;
 
 final class HttpClientConfiguration
 {
-    /** @var string|array|Statement|null */
+    /**
+     * @var string|array|Statement|null
+     */
     public $clientFactory = null;
 
-    /** @var string|Statement|null */
+    /**
+     * @var string|Statement|null
+     */
     public $caChain = null;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     public $client = [];
 }
