@@ -15,7 +15,6 @@ imports:
   - { resource: '../../vendor/symplify/easy-coding-standard/config/set/common/namespaces.yaml' }
   - { resource: '../../vendor/symplify/easy-coding-standard/config/set/common/strict.yaml' }
   - { resource: '../../vendor/symplify/easy-coding-standard/config/set/clean-code.yaml' }
-  - { resource: '../../vendor/symplify/easy-coding-standard/config/set/psr2.yaml' }
   - { resource: '../../vendor/symplify/easy-coding-standard/config/set/psr12.yaml' }
   - { resource: '../../vendor/symplify/easy-coding-standard/config/set/php70.yaml' }
   - { resource: '../../vendor/symplify/easy-coding-standard/config/set/php71.yaml' }
