@@ -24,7 +24,7 @@
 		"nette/di": "^3.0",
 		"nette/http": "^3.0",
 		"nette/utils": "^3.0",
-		"guzzlehttp/guzzle": "^6.3",
+		"guzzlehttp/guzzle": "^7.0",
 		"thecodingmachine/safe": "^1.0"
 	},
 	"require-dev": {
