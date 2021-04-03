@@ -1,7 +1,5 @@
 parameters:
 	checkMissingIterableValueType: false
-	autoload_directories:
-		- %rootDir%/../../../src/
 	ignoreErrors:
 		-
 			message: '~^Method Trejjam\\Ares\\IMapper::map\(\) has no return typehint specified\.$~'
