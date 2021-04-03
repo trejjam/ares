@@ -1,6 +1,0 @@
-[php]
-session.gc_probability=0
-
-zend_extension = xdebug.so
-
-[TESTS]

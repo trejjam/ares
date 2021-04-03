@@ -14,10 +14,10 @@
 	],
 	"support": {
 		"email": "jan.trejbal@tremi.cz",
-		"issues": "https://gitlab.trem.in/trejjam/ares/issues"
+		"issues": "https://github.com/trejjam/ares/issues"
 	},
 	"require": {
-		"php": ">=7.2",
+		"php": ">=7.3",
 
 		"ext-simplexml": "^7.1",
 
