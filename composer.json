@@ -19,7 +19,7 @@
 	"require": {
 		"php": ">=7.3",
 
-		"ext-simplexml": "^7.1",
+		"ext-simplexml": "^7.1 | ^8.0",
 
 		"nette/di": "^3.0",
 		"nette/http": "^3.0",
