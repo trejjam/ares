@@ -1,21 +1,19 @@
 {
 	"name": "trejjam/ares",
-	"description": "Nette Ares",
+	"description": "Ares integration into Nette framework",
 	"keywords": [
 		"nette",
 		"ares",
 		"ico"
 	],
+	"type": "library",
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Jan Trejbal"
+			"name": "Jan Trejbal",
+			"homepage": "https://github.com/trejjam"
 		}
 	],
-	"support": {
-		"email": "jan.trejbal@tremi.cz",
-		"issues": "https://github.com/trejjam/ares/issues"
-	},
 	"require": {
 		"php": "^7.3 | ^8.0",
 
@@ -47,8 +45,6 @@
 		"composer/ca-bundle": "Static CA root chain provider",
 		"paragonie/certainty": "Keep your CA root chain up to date"
 	},
-	"minimum-stability": "dev",
-	"prefer-stable": true,
 	"autoload": {
 		"psr-4": {
 			"Trejjam\\Ares\\": "src/"
@@ -59,10 +55,10 @@
 			"Trejjam\\Ares\\Tests\\": "tests/src/"
 		}
 	},
-	"scripts": {
-		"phpstan": [
-			"vendor/bin/phpstan analyse -l max -c tests/config/phpstan.neon src tests/src tests/cases"
-		]
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"config": {
+		"sort-packages": true
 	},
 	"extra": {
 		"branch-alias": {
