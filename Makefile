@@ -7,7 +7,7 @@ test:
 	XDEBUG_CONFIG="remote_enable=0" vendor/bin/tester -s -p php --colors 1 -C ./tests
 
 phpstan:
-	XDEBUG_CONFIG="remote_enable=0" composer run-script -- phpstan
+	XDEBUG_CONFIG="remote_enable=0" vendor/bin/phpstan analyse -l max -c tests/config/phpstan.neon src tests/src tests/cases
 
 cs: ecs
 
