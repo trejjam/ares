@@ -3,6 +3,9 @@
 all: ecs phpstan test
 	echo "Is done"
 
+install:
+	composer install
+
 test:
 	XDEBUG_CONFIG="remote_enable=0" vendor/bin/tester -s -p php --colors 1 -C ./tests
 
