@@ -31,11 +31,11 @@
 		"composer/ca-bundle": "^1.1",
 		"paragonie/certainty": "^2.6",
 
-		"phpstan/phpstan": "^0.12",
-		"phpstan/phpstan-deprecation-rules": "^0.12",
-		"phpstan/phpstan-strict-rules": "^0.12",
-		"thecodingmachine/phpstan-safe-rule": "^1",
-		"roave/no-floaters": "^1.4.0",
+		"phpstan/phpstan": "^0.12 | ^1.1",
+		"phpstan/phpstan-deprecation-rules": "^0.12 | ^1.0",
+		"phpstan/phpstan-strict-rules": "^0.12 | ^1.0",
+		"thecodingmachine/phpstan-safe-rule": "^1.0",
+		"roave/no-floaters": "^1.4 | ^1.5",
 
 		"symplify/easy-coding-standard": "^9.2",
 
