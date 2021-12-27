@@ -64,7 +64,7 @@ class Request
 
     protected function createUrl(string $ico) : string
     {
-        $url = new Url(static::URL);
+        $url = new Url(self::URL);
         $url->setQueryParameter('ico', $ico);
 
         return $url->getAbsoluteUrl();

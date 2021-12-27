@@ -2,7 +2,7 @@ parameters:
 	checkMissingIterableValueType: false
 	ignoreErrors:
 		-
-			message: '~^Method Trejjam\\Ares\\IMapper::map\(\) has no return typehint specified\.$~'
+			message: '~^Method Trejjam\\Ares\\IMapper::map\(\) has no return type specified\.$~'
 			path: %currentWorkingDirectory%/src/IMapper.php
 
 		-
