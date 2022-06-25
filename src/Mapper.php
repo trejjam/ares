@@ -13,6 +13,10 @@ final class Mapper implements IMapper
     {
         $namespace = $xml->getDocNamespaces();
 
+        if ($namespace === false) {
+            throw new RuntimeException('Unable to get namespace of the document');
+        }
+
         $rootNode = $xml->children(
             $namespace['are']
         );
