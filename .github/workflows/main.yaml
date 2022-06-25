@@ -199,7 +199,7 @@ jobs:
         run: 'echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"'
 
       - name: "Tests"
-        run: "make tests"
+        run: "make test"
 
   tests-code-coverage:
     name: "Tests with code coverage"
