@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Trejjam\Ares\DI;
 
-use Nette\DI\Statement;
+use Nette\DI\Definitions\Statement;
 use Trejjam\Ares\Mapper;
 
 final class ExtensionConfiguration
