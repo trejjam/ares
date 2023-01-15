@@ -6,6 +6,7 @@ use PHP_CodeSniffer\Standards\PSR2\Sniffs\ControlStructures\ControlStructureSpac
 use PHP_CodeSniffer\Standards\Squiz\Sniffs\ControlStructures\ForEachLoopDeclarationSniff;
 use PhpCsFixer\Fixer\Basic\BracesFixer;
 use PhpCsFixer\Fixer\ClassNotation\OrderedClassElementsFixer;
+use PhpCsFixer\Fixer\ControlStructure\ControlStructureContinuationPositionFixer;
 use PhpCsFixer\Fixer\FunctionNotation\ReturnTypeDeclarationFixer;
 use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\Operator\NewWithBracesFixer;
@@ -47,5 +48,8 @@ return static function (ECSConfig $ecsConfig) use ($rootDir) : void {
 
     $ecsConfig->ruleWithConfiguration(ReturnTypeDeclarationFixer::class, [
         'space_before' => 'one',
+    ]);
+    $ecsConfig->ruleWithConfiguration(ControlStructureContinuationPositionFixer::class, [
+        'position' => ControlStructureContinuationPositionFixer::NEXT_LINE,
     ]);
 };

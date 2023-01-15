@@ -47,7 +47,7 @@ class Request
         try {
             $xml = simplexml_load_string($contents);
         }
-        catch (SimplexmlException $e) {
+        catch (SimplexmlException) {
             throw (new IcoNotFoundException($ico))->setResponse($response);
         }
 

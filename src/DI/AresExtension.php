@@ -5,37 +5,41 @@ namespace Trejjam\Ares\DI;
 
 use Composer;
 use GuzzleHttp;
+use Nette;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\Definitions\Statement;
 use Nette\Schema\Expect;
-use Nette\Schema\Schema;
 use Nette\Utils\Strings;
+use stdClass;
 use Trejjam\Ares;
+use Trejjam\Ares\Mapper;
 
 /**
- * @property ExtensionConfiguration $config
- * @method ExtensionConfiguration getConfig()
+ * @property-read stdClass $config
  */
 class AresExtension extends CompilerExtension
 {
-    public function __construct()
+    public function getConfigSchema() : Nette\Schema\Schema
     {
-        $this->config = new ExtensionConfiguration();
-    }
-
-    public function getConfigSchema() : Schema
-    {
-        return Expect::from($this->config);
+        return Expect::structure([
+            'http' => Expect::structure([
+                'clientFactory' => Expect::anyOf(Expect::string(), Expect::array(), Expect::type(Statement::class))->nullable(),
+                'caChain' => Expect::anyOf(Expect::string(), Expect::type(Statement::class))->nullable(),
+                'client' => Expect::array()->default([]),
+            ]),
+            'mapper' => Expect::anyOf(Expect::string(), Expect::array(), Expect::type(Statement::class))->default(Mapper::class),
+        ]);
     }
 
     public function loadConfiguration() : void
     {
-        if ($this->config->http->caChain === null && method_exists(
+        $http = $this->config->http;
+        if ($http->caChain === null && method_exists(
             'Composer\CaBundle\CaBundle',
             'getSystemCaRootBundlePath'
         )) {
-            $this->config->http->caChain = Composer\CaBundle\CaBundle::getSystemCaRootBundlePath();
+            $http->caChain = Composer\CaBundle\CaBundle::getSystemCaRootBundlePath();
         }
     }
 
@@ -45,43 +49,36 @@ class AresExtension extends CompilerExtension
 
         $builder = $this->getContainerBuilder();
 
-        $this->registerFactory('mapper', Ares\IMapper::class, $this->config->mapper);
+        $mapper = $this->config->mapper;
+        $http = $this->config->http;
 
-        if ($this->config->http->clientFactory !== null) {
+        $this->registerFactory('mapper', Ares\IMapper::class, $mapper);
+
+        if ($http->clientFactory !== null) {
             $httpClient = $this->registerFactory(
                 'http.client',
                 GuzzleHttp\Client::class,
-                $this->config->http->clientFactory
+                $http->clientFactory
             );
-        } else {
+        }
+        else {
             $httpClient = $builder->addDefinition($this->prefix('http.client'))->setType(GuzzleHttp\Client::class);
         }
 
-        if ($this->config->http->caChain !== null && !array_key_exists('verify', $this->config->http->client)) {
-            $this->config->http->client['verify'] = $this->config->http->caChain;
+        if ($http->caChain !== null && !array_key_exists('verify', $http->client)) {
+            $http->client['verify'] = $http->caChain;
         }
 
         $httpClient
-            ->setArguments(
-                [
-                    'config' => $this->config->http->client,
-                ]
-            )
+            ->setArguments(['config' => $http->client])
             ->setAutowired(false);
 
         $builder
             ->addDefinition($this->prefix('request'))
-            ->setFactory(Ares\Request::class)->setArguments(
-                [
-                    'httpClient' => $httpClient,
-                ]
-            );
+            ->setFactory(Ares\Request::class)->setArguments(['httpClient' => $httpClient]);
     }
 
-    /**
-     * @param string|array|Statement $factory
-     */
-    private function registerFactory(string $name, string $type, $factory) : ServiceDefinition
+    private function registerFactory(string $name, string $type, string|array|Statement $factory) : ServiceDefinition
     {
         $builder = $this->getContainerBuilder();
 
@@ -89,12 +86,9 @@ class AresExtension extends CompilerExtension
             $factoryDefinition = $builder->addDefinition($this->prefix($name));
 
             $factoryDefinition->setFactory($factory);
-        } else {
-            $this->loadDefinitionsFromConfig(
-                [
-                    $name => $factory,
-                ]
-            );
+        }
+        else {
+            $this->loadDefinitionsFromConfig([$name => $factory]);
 
             $factoryDefinition = $builder->getDefinition($this->prefix($name));
         }
