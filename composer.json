@@ -15,9 +15,9 @@
 		}
 	],
 	"require": {
-		"php": "^7.3 | ^8.0",
+		"php": "~8.1.0 | ~8.2.0",
 
-		"ext-simplexml": "^7.1 | ^8.0",
+		"ext-simplexml": "~8.1.0 | ~8.2.0",
 
 		"nette/di": "^3.0",
 		"nette/http": "^3.0",
@@ -62,7 +62,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "v0.6.x-dev"
+			"dev-master": "v0.7.x-dev"
 		}
 	}
 }
