@@ -53,7 +53,8 @@ class AresExtension extends CompilerExtension
                 GuzzleHttp\Client::class,
                 $this->config->http->clientFactory
             );
-        } else {
+        }
+        else {
             $httpClient = $builder->addDefinition($this->prefix('http.client'))->setType(GuzzleHttp\Client::class);
         }
 
@@ -89,7 +90,8 @@ class AresExtension extends CompilerExtension
             $factoryDefinition = $builder->addDefinition($this->prefix($name));
 
             $factoryDefinition->setFactory($factory);
-        } else {
+        }
+        else {
             $this->loadDefinitionsFromConfig(
                 [
                     $name => $factory,
