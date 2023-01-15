@@ -28,16 +28,16 @@
 	"require-dev": {
 		"nette/tester": "^2.4",
 
-		"composer/ca-bundle": "^1.1",
-		"paragonie/certainty": "^2.6",
+		"composer/ca-bundle": "^1.3",
+		"paragonie/certainty": "^2.8",
 
-		"phpstan/phpstan": "^1.7",
-		"phpstan/phpstan-deprecation-rules": "^1.0",
-		"phpstan/phpstan-strict-rules": "^1.3",
+		"phpstan/phpstan": "^1.9",
+		"phpstan/phpstan-deprecation-rules": "^1.1",
+		"phpstan/phpstan-strict-rules": "^1.4",
 		"thecodingmachine/phpstan-safe-rule": "^1.2",
-		"roave/no-floaters": "^1.5",
+		"roave/no-floaters": "^1.9",
 
-		"symplify/easy-coding-standard": "^11.0",
+		"symplify/easy-coding-standard": "^11.2",
 
 		"roave/security-advisories": "dev-master"
 	},
