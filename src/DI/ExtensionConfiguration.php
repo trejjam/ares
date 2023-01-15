@@ -13,10 +13,7 @@ final class ExtensionConfiguration
      */
     public $mapper = Mapper::class;
 
-    /**
-     * @var HttpClientConfiguration
-     */
-    public $http;
+    public HttpClientConfiguration $http;
 
     public function __construct()
     {
