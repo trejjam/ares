@@ -7,13 +7,10 @@ use Composer\CaBundle\CaBundle;
 use GuzzleHttp;
 use Nette;
 use Nette\DI\Compiler;
-use Nette\DI\Definitions\Reference;
-use Tester\TestCase;
-use Tester\Expect;
 use Tester\Assert;
-use Trejjam\Ares\Mapper;
+use Tester\TestCase;
 use Trejjam\Ares\DI\AresExtension;
-use Composer;
+use Trejjam\Ares\Mapper;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -21,7 +18,7 @@ class DITest extends TestCase
 {
     private const NAME = 'trejjam.ares';
 
-    public function testConfig()
+    public function testConfig() : void
     {
         $aresExtension = new AresExtension;
 
