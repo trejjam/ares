@@ -5,29 +5,16 @@ namespace Trejjam\Ares;
 
 use GuzzleHttp;
 use Nette\Http\Url;
-use Safe\Exceptions\SimplexmlException;
 use SimpleXMLElement;
-use function Safe\simplexml_load_string;
 
 class Request
 {
     private const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
 
-    /**
-     * @var GuzzleHttp\Client
-     */
-    private $httpClient;
-    /**
-     * @var IMapper
-     */
-    private $mapper;
-
     public function __construct(
-        GuzzleHttp\Client $httpClient,
-        IMapper $mapper
+        public readonly GuzzleHttp\Client $httpClient,
+        public readonly IMapper $mapper
     ) {
-        $this->httpClient = $httpClient;
-        $this->mapper = $mapper;
     }
 
     public function fetch(string $ico) : SimpleXMLElement
@@ -44,10 +31,8 @@ class Request
 
         $contents = $body->getContents();
 
-        try {
-            $xml = simplexml_load_string($contents);
-        }
-        catch (SimplexmlException) {
+        $xml = simplexml_load_string($contents);
+        if ($xml === false) {
             throw (new IcoNotFoundException($ico))->setResponse($response);
         }
 

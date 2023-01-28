@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace Trejjam\Ares;
 
+use DateTimeImmutable;
+use Exception;
 use Nette;
-use Safe\DateTimeImmutable;
 use SimpleXMLElement;
 
 final class Mapper implements IMapper
@@ -42,6 +43,9 @@ final class Mapper implements IMapper
         return $this->mapToEntity($dataNodes->VBAS);
     }
 
+    /**
+     * @throws Exception
+     */
     private function mapToEntity(SimpleXMLElement $VBAS) : Entity\Ares
     {
         $legalForm = new Entity\LegalForm(

@@ -8,12 +8,12 @@ use GuzzleHttp;
 use Nette;
 use Nette\DI\Compiler;
 use Nette\DI\Definitions\Reference;
-use Tester\TestCase;
-use Tester\Expect;
+use Nette\DI\Definitions\ServiceDefinition;
+use stdClass;
 use Tester\Assert;
-use Trejjam\Ares\Mapper;
+use Tester\TestCase;
 use Trejjam\Ares\DI\AresExtension;
-use Composer;
+use Trejjam\Ares\Mapper;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -21,7 +21,7 @@ class DITest extends TestCase
 {
     private const NAME = 'trejjam.ares';
 
-    public function testConfig()
+    public function testConfig() : void
     {
         $aresExtension = new AresExtension;
 
@@ -30,6 +30,7 @@ class DITest extends TestCase
 
         $compiler->processExtensions();
 
+        /** @var stdClass $aresConfig */
         $aresConfig = $aresExtension->getConfig();
 
         Assert::same(Mapper::class, $aresConfig->mapper);
@@ -63,6 +64,7 @@ class DITest extends TestCase
 
         $aresExtension->beforeCompile();
 
+        /** @var stdClass $aresConfig */
         $aresConfig = $aresExtension->getConfig();
 
         Assert::same(Mapper::class, $aresConfig->mapper);
@@ -72,8 +74,10 @@ class DITest extends TestCase
         Assert::same(['verify' => CaBundle::getSystemCaRootBundlePath()], $aresConfig->http->client);
 
         $httpClient = $containerBuilder->getDefinition(self::NAME . '.http.client');
+        \assert($httpClient instanceof ServiceDefinition);
 
         $httpClientServiceDefinition = $httpClient->getFactory()->getEntity();
+        \assert($httpClientServiceDefinition instanceof Reference);
         Assert::same('guzzleClassFactory', $httpClientServiceDefinition->getValue());
     }
 
@@ -98,6 +102,7 @@ class DITest extends TestCase
 
         $aresExtension->beforeCompile();
 
+        /** @var stdClass $aresConfig */
         $aresConfig = $aresExtension->getConfig();
 
         Assert::same(Mapper::class, $aresConfig->mapper);
@@ -109,6 +114,7 @@ class DITest extends TestCase
         $containerBuilder = $compiler->getContainerBuilder();
         $containerBuilder = $compiler->getContainerBuilder();
         $httpClient = $containerBuilder->getDefinition(self::NAME . '.http.client');
+        \assert($httpClient instanceof ServiceDefinition);
 
         $httpClientServiceDefinition = $httpClient->getFactory()->getEntity();
         Assert::same('GuzzleHttp\Client([])', $httpClientServiceDefinition);
@@ -135,6 +141,7 @@ class DITest extends TestCase
 
         $aresExtension->beforeCompile();
 
+        /** @var stdClass $aresConfig */
         $aresConfig = $aresExtension->getConfig();
 
         Assert::same(Mapper::class, $aresConfig->mapper);
