@@ -5,9 +5,7 @@ namespace Trejjam\Ares;
 
 use GuzzleHttp;
 use Nette\Http\Url;
-use Safe\Exceptions\SimplexmlException;
 use SimpleXMLElement;
-use function Safe\simplexml_load_string;
 
 class Request
 {

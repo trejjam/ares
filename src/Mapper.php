@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Trejjam\Ares;
 
 use Nette;
-use Safe\DateTimeImmutable;
 use SimpleXMLElement;
 
 final class Mapper implements IMapper
