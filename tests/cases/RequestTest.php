@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Trejjam\Ares\Tests;
 
 use Composer;
-use Exception;
 use GuzzleHttp;
 use SimpleXMLElement;
 use Tester;
@@ -15,7 +14,7 @@ require __DIR__ . '/../bootstrap.php';
 
 class RequestTest extends Tester\TestCase
 {
-    private null|Ares\Request $aresRequest;
+    private Ares\Request $aresRequest;
 
     protected function setUp() : void
     {
@@ -32,23 +31,23 @@ class RequestTest extends Tester\TestCase
         );
     }
 
-    /**
-     * @throws Exception
-     */
     public function testConfig() : void
     {
         $validIcoFetch = $this->aresRequest->fetch('27074358');
+        Assert::notNull($validIcoFetch);
         Assert::type(SimpleXMLElement::class, $validIcoFetch);
 
         $invalidIcoFetch = $this->aresRequest->fetch('27074357');
+        Assert::notNull($invalidIcoFetch);
         Assert::type(SimpleXMLElement::class, $invalidIcoFetch);
 
         /** @var Ares\Entity\Ares $ares */
         $ares = $this->aresRequest->getResponse('27074358');
+        Assert::notNull($ares);
         Assert::type(Ares\Entity\Ares::class, $ares);
 
-        $address = $ares->getAddress();
-        $legalForm = $ares->getLegalForm();
+        $address = $ares->address;
+        $legalForm = $ares->legalForm;
 
         Assert::type(Ares\Entity\Address::class, $address);
         Assert::type(Ares\Entity\LegalForm::class, $legalForm);
