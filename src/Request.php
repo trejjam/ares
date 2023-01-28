@@ -42,10 +42,8 @@ class Request
 
         $contents = $body->getContents();
 
-        try {
-            $xml = simplexml_load_string($contents);
-        }
-        catch (SimplexmlException) {
+        $xml = simplexml_load_string($contents);
+        if ($xml === false) {
             throw (new IcoNotFoundException($ico))->setResponse($response);
         }
 
