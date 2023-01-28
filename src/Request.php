@@ -11,21 +11,10 @@ class Request
 {
     private const URL = 'http://wwwinfo.mfcr.cz/cgi-bin/ares/darv_bas.cgi';
 
-    /**
-     * @var GuzzleHttp\Client
-     */
-    private $httpClient;
-    /**
-     * @var IMapper
-     */
-    private $mapper;
-
     public function __construct(
-        GuzzleHttp\Client $httpClient,
-        IMapper $mapper
+        public readonly GuzzleHttp\Client $httpClient,
+        public readonly IMapper $mapper
     ) {
-        $this->httpClient = $httpClient;
-        $this->mapper = $mapper;
     }
 
     public function fetch(string $ico) : SimpleXMLElement
