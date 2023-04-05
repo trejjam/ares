@@ -58,7 +58,7 @@ final class Mapper implements IMapper
         if (isset($AA->CA) && !isset($AA->CD) && !isset($AA->CO)) {
             $ca = explode('/', strval($AA->CA));
             $AA->CD = $ca[0];
-            $AA->CO = $ca[1];
+            $AA->CO = $ca[1] ?? '';
         }
 
         $address = new Entity\Address(
