@@ -31,17 +31,22 @@ class RequestTest extends Tester\TestCase
         );
     }
 
-    public function testConfig() : void
+    public function testFetchValidIco() : void
     {
         $validIcoFetch = $this->aresRequest->fetch('27074358');
         Assert::notNull($validIcoFetch);
         Assert::type(SimpleXMLElement::class, $validIcoFetch);
+    }
 
+    public function testFetchInvalidIco() : void
+    {
         $invalidIcoFetch = $this->aresRequest->fetch('27074357');
         Assert::notNull($invalidIcoFetch);
         Assert::type(SimpleXMLElement::class, $invalidIcoFetch);
+    }
 
-        /** @var Ares\Entity\Ares $ares */
+    public function testFetchAndMapValidIco() : void
+    {
         $ares = $this->aresRequest->getResponse('27074358');
         Assert::notNull($ares);
         Assert::type(Ares\Entity\Ares::class, $ares);
@@ -51,7 +56,10 @@ class RequestTest extends Tester\TestCase
 
         Assert::type(Ares\Entity\Address::class, $address);
         Assert::type(Ares\Entity\LegalForm::class, $legalForm);
+    }
 
+    public function testFetchAndMapInvalidIco() : void
+    {
         Assert::throws(function () {
             $this->aresRequest->getResponse('27074357');
         }, Ares\IcoNotFoundException::class, 'Chyba 71 - nenalezeno 27074357', 1);
