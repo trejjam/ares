@@ -10,7 +10,6 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\Definitions\Statement;
 use Nette\Schema\Expect;
-use Nette\Utils\Strings;
 use stdClass;
 use Trejjam\Ares;
 use Trejjam\Ares\Mapper;
@@ -82,7 +81,7 @@ class AresExtension extends CompilerExtension
     {
         $builder = $this->getContainerBuilder();
 
-        if (is_string($factory) && Strings::startsWith($factory, '@')) {
+        if (is_string($factory) && str_starts_with($factory, '@')) {
             $factoryDefinition = $builder->addDefinition($this->prefix($name));
 
             $factoryDefinition->setFactory($factory);
