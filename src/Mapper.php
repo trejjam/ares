@@ -56,7 +56,7 @@ final class Mapper implements IMapper
         $AA = $VBAS->AA;
 
         if (isset($AA->CA) && !isset($AA->CD) && !isset($AA->CO)) {
-            $ca = explode('/', strval($AA->CA));
+            $ca = explode('/', strval($AA->CA), 2);
             $AA->CD = $ca[0];
             $AA->CO = $ca[1] ?? '';
         }
