@@ -249,8 +249,8 @@ poskytování technických služeb k ochraně majetku a osob
         Assert::notNull($aresEntity);
         Assert::type(Ares\Entity\Ares::class, $aresEntity);
 
-        Assert::equal("778", $aresEntity->address->houseNumber);
-        Assert::equal("3a", $aresEntity->address->referenceNumber);
+        Assert::equal('778', $aresEntity->address->houseNumber);
+        Assert::equal('3a', $aresEntity->address->referenceNumber);
     }
 
     public function testMapWithCaField() : void
@@ -464,8 +464,8 @@ poskytování technických služeb k ochraně majetku a osob
         Assert::notNull($aresEntity);
         Assert::type(Ares\Entity\Ares::class, $aresEntity);
 
-        Assert::equal("1056", $aresEntity->address->houseNumber);
-        Assert::equal("5", $aresEntity->address->referenceNumber);
+        Assert::equal('1056', $aresEntity->address->houseNumber);
+        Assert::equal('5', $aresEntity->address->referenceNumber);
     }
 }
 
