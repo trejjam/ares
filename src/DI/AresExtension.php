@@ -9,6 +9,7 @@ use Nette;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\DI\Definitions\Statement;
+use Nette\PhpGenerator\Literal;
 use Nette\Schema\Expect;
 use stdClass;
 use Trejjam\Ares;
@@ -25,7 +26,7 @@ class AresExtension extends CompilerExtension
             'http' => Expect::structure([
                 'clientFactory' => Expect::anyOf(Expect::string(), Expect::array(), Expect::type(Statement::class))->nullable(),
                 'caChain' => Expect::anyOf(Expect::string(), Expect::type(Statement::class))->nullable(),
-                'client' => Expect::array()->default([]),
+                'client' => Expect::array()->dynamic()->default([]),
             ]),
             'mapper' => Expect::anyOf(Expect::string(), Expect::array(), Expect::type(Statement::class))->default(Mapper::class),
         ]);
@@ -64,7 +65,12 @@ class AresExtension extends CompilerExtension
             $httpClient = $builder->addDefinition($this->prefix('http.client'))->setType(GuzzleHttp\Client::class);
         }
 
-        if ($http->caChain !== null && !array_key_exists('verify', $http->client)) {
+        if ($http->client instanceof Literal) {
+            $http->client = new Literal(
+                "array_merge(['verify' => '{$http->caChain}'], {$http->client})"
+            );
+        }
+        elseif ($http->caChain !== null && !array_key_exists('verify', $http->client)) {
             $http->client['verify'] = $http->caChain;
         }
 
